@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="log_action" instance="Codilar\AdminLogs\Observer\Adminhtml\Predispatch" />
+    </event>
+    <event name="controller_action_postdispatch">
+        <observer name="save_logged_action_with_response" instance="Codilar\AdminLogs\Observer\Adminhtml\Postdispatch" />
+    </event>
+</config>

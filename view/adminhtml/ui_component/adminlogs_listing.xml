@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">adminlogs_listing.adminlogs_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>codilar_admin_logs_columns</spinner>
+        <deps>
+            <dep>adminlogs_listing.adminlogs_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="adminlogs_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">codilar_admin_logs_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Codilar_AdminLogs::view_all</aclResource>
+        <dataProvider class="Codilar\AdminLogs\Ui\Component\Listing\AdminLogs\DataProvider" name="adminlogs_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>codilar_admin_logs_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>false</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="adminlogs/index/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="codilar_admin_logs_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">adminlogs_listing.adminlogs_listing.codilar_admin_logs_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">view</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>codilar_admin_logs_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="codilar_admin_logs_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="area">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Area</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Logged At</label>
+            </settings>
+        </column>
+        <column name="username">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">User</label>
+            </settings>
+        </column>
+        <column name="ip_address">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">IP Address</label>
+            </settings>
+        </column>
+        <column name="action_type">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Action Type</label>
+            </settings>
+        </column>
+        <column name="action_data" class="Codilar\AdminLogs\Ui\Component\Listing\Column\AdminLogs\ActionData">
+            <settings>
+                <sortable>false</sortable>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Action Data</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Codilar\AdminLogs\Ui\Component\Listing\Column\AdminLogs\Actions">
+            <settings>
+                <indexField>codilar_admin_logs_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

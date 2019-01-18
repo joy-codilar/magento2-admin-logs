@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Codilar_AdminLogs::view_all" title="Admin Logs" translate="title" module="Codilar_AdminLogs" sortOrder="100" parent="Magento_Backend::system_tools" action="adminlogs" resource="Codilar_AdminLogs::view"/>
+    </menu>
+</config>

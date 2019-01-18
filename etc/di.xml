@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Codilar\AdminLogs\Api\Data\AdminLogsInterface" type="Codilar\AdminLogs\Model\AdminLogs" />
+    <preference for="Codilar\AdminLogs\Api\AdminLogsRepositoryInterface" type="Codilar\AdminLogs\Model\AdminLogsRepository" />
+    <preference for="Codilar\AdminLogs\Api\AdminLogsManagementInterface" type="Codilar\AdminLogs\Model\AdminLogsManagement" />
+</config>

@@ -1,0 +1,87 @@
+<?php
+/** @var \Codilar\AdminLogs\Block\Adminhtml\View $block */
+$adminLog = $block->getAdminLog();
+?>
+<a href="<?php echo $block->getBackUrl() ?>"><?php echo __("Back") ?></a>
+<div class="admin-log">
+    <div class="row">
+        <div class="title"><?php echo __("User") ?></div>
+        <div class="value"><?php echo $adminLog->getUsername() ?></div>
+    </div>
+    <div class="row">
+        <div class="title"><?php echo __("IP Address") ?></div>
+        <div class="value">
+            <a target="_blank" href="<?php echo sprintf("https://www.infobyip.com/ip-%s.html", $adminLog->getIpAddress())?>"><?php echo $adminLog->getIpAddress() ?></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="title"><?php echo __("Area") ?></div>
+        <div class="value"><?php echo $adminLog->getArea() ?></div>
+    </div>
+    <div class="row">
+        <div class="title"><?php echo __("Action") ?></div>
+        <div class="value"><?php echo ucwords(str_replace("_", " ", $adminLog->getActionType())) ?></div>
+    </div>
+    <div class="row">
+        <div class="title"><?php echo __("Logged At") ?></div>
+        <div class="value"><?php echo $block->formatDate($adminLog->getCreatedAt(), \IntlDateFormatter::FULL, true) ?></div>
+    </div>
+    <div class="row">
+        <div class="title"><?php echo __("Messages") ?></div>
+        <div class="value">
+            <?php if (count($adminLog->getPostActionMessages())): ?>
+                <?php foreach ($adminLog->getPostActionMessages() as $postActionMessage): ?>
+                    <p><?php echo __("<em>%type</em> : %text", $postActionMessage) ?></p>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p><?php echo __("No Messages to show") ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="title"><?php echo __("Data") ?></div>
+        <div class="value">
+            <?php if (count($adminLog->getActionData())): ?>
+                <div class="pretty-print-json">
+                    <?php echo $block->getFormattedJsonArrayHtml($adminLog->getActionData()) ?>
+                </div>
+            <?php else: ?>
+                <p><?php echo __("No data to show") ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .admin-log .row {
+        padding: 10px;
+        margin: 10px;
+        border-bottom: 1px solid silver;
+    }
+    .admin-log .row .title, .row .value {
+        display: inline-block;
+    }
+    .admin-log .row .title {
+        font-size: 2em;
+        margin-right: 10px;
+        padding-right: 10px;
+        min-width: 15%;
+        text-align: right;
+        vertical-align: top;
+    }
+    .admin-log .row .value {
+        font-size: 1.2em;
+    }
+    .admin-log .row .value .pretty-print-json {
+        padding: 30px 50px;
+        margin: 10px;
+        background-color: #fafafa;
+    }
+</style>
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $('.pretty-print-json').css("max-width", (window.screen.width / 1.5) + 'px');
+    });
+</script>
+
