@@ -9,7 +9,6 @@
 
 namespace Codilar\AdminLogs\Observer\Adminhtml;
 
-
 use Codilar\AdminLogs\Api\AdminLogsManagementInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Event\Observer;
@@ -35,8 +34,7 @@ class Predispatch implements ObserverInterface
     public function __construct(
         Registry $registry,
         AdminLogsManagementInterface $adminLogsManagement
-    )
-    {
+    ) {
         $this->registry = $registry;
         $this->adminLogsManagement = $adminLogsManagement;
     }
@@ -50,6 +48,6 @@ class Predispatch implements ObserverInterface
         /** @var RequestInterface $request */
         $request = $observer->getEvent()->getData('request');
         $log = $this->adminLogsManagement->buildLog($request);
-        $this->registry->register(\Codilar\AdminLogs\Model\ResourceModel\AdminLogs::TABLE_NAME, $log);
+        $this->registry->register(\Codilar\AdminLogs\Model\ResourceModel\AdminLogs::TABLE_NAME, $log, true);
     }
 }

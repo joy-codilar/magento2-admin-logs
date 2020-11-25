@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * db_schema.xml
+ *
+ * @package     magento2
+ * @author      Ankith G
+ * @license     https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ * @link        https://www.codilar.com/
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="codilar_admin_logs" resource="default" engine="innodb" comment="Codilar Admin Logs Table">
+        <column xsi:type="int" name="codilar_admin_logs_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="area" nullable="false" comment="User Login" length="40"/>
+        <column xsi:type="varchar" name="username" nullable="false" comment="User Login" length="40"/>
+        <column xsi:type="varchar" name="ip_address" nullable="false" comment="IP Address" length="100"/>
+        <column xsi:type="varchar" name="action_type" nullable="false" comment="Action Type" length="300"/>
+        <column xsi:type="varchar" name="action_data" nullable="false" comment="Action Date (JSON)" length="1024" />
+        <column xsi:type="varchar" name="post_action_messages" nullable="false" comment="Action Messages (JSON)" length="1024" />
+        <column xsi:type="timestamp" name="created_at" nullable="false" on_update="true"  default="CURRENT_TIMESTAMP"   comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="codilar_admin_logs_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ADMIN_USERNAME_REFERENCED_IN_ADMIN_LOGS"
+                    table="admin_user" column="username" referenceTable="admin_user"
+                    referenceColumn="username" onDelete="CASCADE"/>
+    </table>
+</schema>

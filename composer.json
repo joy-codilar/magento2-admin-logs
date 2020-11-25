@@ -2,11 +2,11 @@
     "name": "codilar/magento2-admin-logs",
     "description": "Log all admin operations",
     "require": {
-        "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
-        "magento/module-backend": "100.2.*"
+        "php": "*",
+        "magento/module-backend": "*"
     },
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
