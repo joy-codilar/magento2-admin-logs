@@ -83,6 +83,6 @@ class Postdispatch implements ObserverInterface
     }
 
     protected function log($message) {
-        $this->monolog->addInfo("CODILAR ADMIN LOGS: $message");
+        $this->monolog->info("CODILAR ADMIN LOGS: $message");
     }
 }
