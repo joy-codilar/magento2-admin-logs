@@ -54,8 +54,10 @@ class View extends Template
      */
     protected function validateJsonArray($jsonArray) {
         foreach ($jsonArray as $key => $value) {
-            if (@is_array(\json_decode($value, true))) {
-                $jsonArray[$key] = $this->validateJsonArray(\json_decode($value, true));
+            if (!is_array($value)) {
+                if (@is_array(json_decode($value, true))) {
+                    $jsonArray[$key] = $this->validateJsonArray(\json_decode($value, true));
+                }
             }
         }
         return $jsonArray;
